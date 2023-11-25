@@ -19,11 +19,19 @@ export class ListAppareilComponent implements OnInit{
 
   switchOnAll(){
     console.log('allumer');
-    alert('alummer tous les appareils')
+    alert('alummer tous les appareils');
+    this.service.switchAllOn();
+
   }
 
 
   ngOnInit(): void {
     this.appreils=this.service.appreils;
+  }
+
+  switchOffAll() {
+    console.log('allumer');
+    alert('alummer tous les appareils');
+    this.service.switchAllOff();
   }
 }

@@ -3,5 +3,6 @@
 <app-appareil *ngFor="let item of appreils" [appareilName]="item.name" [appareilStatut]="item.statut"></app-appareil>
 
 <button (click)="switchOnAll()" class="btn btn-warning" [disabled]="isOk">Switch All On </button>
+<button (click)="switchOffAll()" class="btn btn-warning" [disabled]="isOk">Switch All Off </button>
 
 
