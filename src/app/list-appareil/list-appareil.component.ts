@@ -9,6 +9,7 @@ import {AppareilService} from "../service/appareil.service";
 export class ListAppareilComponent implements OnInit{
   isOk:boolean=true;
   appreils:any;
+
   constructor(private service:AppareilService) {
     setTimeout(()=>{
       this.isOk=false;
@@ -21,7 +22,7 @@ export class ListAppareilComponent implements OnInit{
     alert('alummer tous les appareils')
   }
 
- 
+
   ngOnInit(): void {
     this.appreils=this.service.appreils;
   }
