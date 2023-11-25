@@ -1,0 +1,7 @@
+<!--<app-appareil appareilName="Machine à laver " appareilStatut="On"></app-appareil>-->
+<!-- ngfor -->
+<app-appareil *ngFor="let item of appreils" [appareilName]="item.name" [appareilStatut]="item.statut"></app-appareil>
+
+<button (click)="switchOnAll()" class="btn btn-warning" [disabled]="isOk">Switch All On </button>
+
+
