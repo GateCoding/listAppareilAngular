@@ -9,18 +9,29 @@ import {Observable} from "rxjs";
 export class AppareilService {
   appreils:any;
 //url
-  url="http://localhost:8082/appareil/all"
+  url="http://localhost:8082"
   constructor( private htpp :HttpClient ) { }
-  findAll():Observable <Appareil[]>{
-    return this.htpp.get<Appareil[]>(this.url);
+  getAppareilsList():Observable <Appareil[]>{
+    return this.htpp.get<Appareil[]>(`${this.url}/appareil/all`);
   }
 
   // Function to switch all devices on
-  switchAllOn() {
+  /*switchAllOn() {
     for (let item of this.appreils){ item.status="On"}
 
+  }*/
+  switchAllOn() {
+    // Envoi de la requête HTTP au backend
+    this.htpp.put(`${this.url}/switch-all-on`, {}).subscribe(
+      (response) => {
+        console.log('Tous les appareils ont été allumés avec succès.', response);
+        // Mettez à jour vos données locales si nécessaire
+      },
+      (error) => {
+        console.error('Erreur lors de l\'allumage de tous les appareils.', error);
+      }
+    );
   }
-
   // Function to switch all devices off
   switchAllOff() {
     for (let item of this.appreils){ item.status="Off"}
@@ -35,6 +46,9 @@ else {
 }
   }*/
 
+  createAppareil(appreils : Appareil):Observable<Appareil>{
+    return this.htpp.post<Appareil>(`${this.url}`,appreils);
+  }
   switch(id:number): void {
     for (let item of this.appreils){
       if(item.id == id){
@@ -51,5 +65,8 @@ else {
       this.appreils[id].statut="On"
     }
   }
+
+
+
 }
 

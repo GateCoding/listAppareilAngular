@@ -27,7 +27,7 @@ export class ListAppareilComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.appreils= this.service.findAll().subscribe(data=>{this.appreils=data;});
+    this.appreils= this.service.getAppareilsList().subscribe(data=>{this.appreils=data;});
   }
 
   switchOffAll() {
