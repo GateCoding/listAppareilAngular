@@ -1,25 +1,55 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Appareil} from "../model/Appareil";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppareilService {
-  appreils =[
-{name:"machine à laver",statut:"On"},
-{name:"Telephone",statut:"On"},
-{name:"telephone",statut:"Off"}]
-  constructor() { }
+  appreils:any;
+//url
+  url="http://localhost:8082/appareil/all"
+  constructor( private htpp :HttpClient ) { }
+  findAll():Observable <Appareil[]>{
+    return this.htpp.get<Appareil[]>(this.url);
+  }
 
   // Function to switch all devices on
   switchAllOn() {
-    this.appreils.forEach(appareil => {
-      appareil.statut = "On";
-    });
+    for (let item of this.appreils){ item.status="On"}
+
   }
 
   // Function to switch all devices off
   switchAllOff() {
-    this.appreils.forEach(appareil => {
-      appareil.statut = "Off";
-    });}
+    for (let item of this.appreils){ item.status="Off"}
+
+  }
+ /* switch(id:number): void {
+if(this.appreils[id].statut==="On"){
+  this.appreils[id].statut= "Off";
 }
+else {
+  this.appreils[id].statut="On"
+}
+  }*/
+
+  switch(id:number): void {
+    for (let item of this.appreils){
+      if(item.id == id){
+        if(item.statut=="On"){
+          item.statut="Off"
+        }
+        item.statut="On"
+      }
+    }
+    if(this.appreils[id].statut==="On"){
+      this.appreils[id].statut= "Off";
+    }
+    else {
+      this.appreils[id].statut="On"
+    }
+  }
+}
+

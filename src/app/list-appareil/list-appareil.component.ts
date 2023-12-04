@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppareilService} from "../service/appareil.service";
+import {Appareil} from "../model/Appareil";
 
 @Component({
   selector: 'app-list-appareil',
@@ -26,7 +27,7 @@ export class ListAppareilComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.appreils=this.service.appreils;
+    this.appreils= this.service.findAll().subscribe(data=>{this.appreils=data;});
   }
 
   switchOffAll() {
